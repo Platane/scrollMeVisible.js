@@ -1,49 +1,166 @@
-<!DOCTYPE html>
 <html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+<script src="external/jquery-1.8.3.js"></script>
+<script src="external/dat.gui.min.js"></script>
+<script src="external/jquery.lorem.js"></script>
+<script src="scrollMeVisible.js"></script>
+<link rel="stylesheet" href="style.css" type="text/css">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Scrollmevisible.js : scrollMeVisible.js" />
+<body>
+	<div id="header">
+		<h1><span>This web page is such a mess!</span></h1>
+		<h3><span>How I am going to find a specific element?</span></h3>
+		<h4><span><i>Chill out, scrollMeVisible.js got this</i></span></h4>
+	</div>
+	<div id="view">
+		<nav>
+		</nav>
+		<div id="main-view">
+			<div id="square-container">
+				<div class="square">
+					<h1></h1>
+					<div class="square-list">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<script type="text/javascript">
+var placeMarker=function(x,y){
+	var d=$('<div>')
+	.css({'position':'absolute','width':'10px','height':'10px','background-color':'#48abe7'})
+	.css({'top':y+'px','left':x+'px'})
+	.appendTo('body');
+}
+window.onload=function(){
+	var html=$('#square-container').html();
+	for(var i=0;i<40;i++)
+		$('#square-container').append( $(html) );
 
-    <title>Scrollmevisible.js</title>
-  </head>
 
-  <body>
+	$('li').each(function(){
+		$(this).lorem({'type':'words','amount':3});
+	})
+	$('#main-view').find('h1').each(function(){
+		$(this).lorem({'type':'words','amount':1});
+	})
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Platane/scrollMeVisible.js">View on GitHub</a>
 
-          <h1 id="project_title">Scrollmevisible.js</h1>
-          <h2 id="project_tagline">scrollMeVisible.js</h2>
+	var pool=$('.square');
+	var f3=$( pool.get( Math.floor( pool.length * Math.random() ) ) );
+	var pool=$('li');
+	var f1=$( pool.get( Math.floor( pool.length * Math.random() ) ) );
+	var f2=$( pool.get( Math.floor( pool.length * Math.random() ) ) );
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Platane/scrollMeVisible.js/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Platane/scrollMeVisible.js/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+	f1.css({'background-color' : 'blue'}).attr('id','f1');
+	f2.css({'background-color' : 'orange'}).attr('id','f2');
+	f3.css({'background-color' : 'orange'}).attr('id','f3');
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome</h3>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Scrollmevisible.js maintained by <a href="https://github.com/Platane">Platane</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+	 var scrollTo=function(el,scrollx,scrolly){
+      if(el.scrollTo){
+        el.scrollTo(scrollx,scrolly);
+        return;
+      }
+      if(el.scrollLeft!=null && el.scrollTop!=null){
+        el.scrollLeft=scrollx;
+        el.scrollTop=scrolly;
+        return;
+      }
+      if(el.scrollX!=null && el.scrollY!=null){
+        el.scrollX=scrollx;
+        el.scrollY=scrolly;
+        return;
+      }
+      throw 'unable to scroll';
+    };
+	var options = {
+		animate:true,
+		ease:'linear',
+		duration:'300',
+		queu:false,
+		fixedSpeed:false,
+		findRandom:function(){
+			var pool=$('li:not(.colored)');
+			var r=$( pool.get( Math.floor( pool.length * Math.random() ) ) )
+			.addClass('colored')
+			.scrollMeVisible( options ); 
+		},
+		find1:function(){
+			f1.scrollMeVisible( options ); 
+		},
+		find2:function(){
+			f2.scrollMeVisible( options ); 
+		},
+		find3:function(){
+			f3.scrollMeVisible( options ); 
+		},
+		reset:function(){
+			$('*').each(function(){
+				scrollTo(this,0,0);
+			});
+			$('.colored').each(function(){
+				$(this).removeClass('colored');
+			});
+		},
+		alertCallback:false,
+		callback:null,
+	};
+	window.options=options;
 
-    
 
-  </body>
+	(function(scope){
+
+
+		var gui = new dat.GUI();
+
+		gui.add(options,'find1');
+		gui.add(options,'find2');
+		gui.add(options,'find3');
+		gui.add(options,'findRandom');
+
+		var opt = gui.addFolder('options');
+	    opt.add(options,'animate');
+	    opt.add(options,'ease',['linear','inOut']);
+		opt.add(options,'duration',0,2000);
+		opt.add(options,'queu');
+		opt.add(options,'fixedSpeed');
+		opt.add(options,'alertCallback').onChange(
+			function(){
+				updateCallBack();
+			}
+		);
+
+		gui.add(options,'reset');
+		
+		var updateCallBack=function(){
+			options.callback=options.alertCallback ? function(){alert('end of animation');} : null;
+		};
+
+	})(this);
+
+};
+</script>
+
+
 </html>
