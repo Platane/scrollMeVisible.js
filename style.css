@@ -1,0 +1,98 @@
+html{
+	font-family:Calibri, Helvetica , 'Segoe UI Semibold' , Arial;
+}
+nav{
+	width:300px;
+	height:100%;
+	margin-left: 30px;
+	display:inline-block;
+
+}
+#view{
+	white-space: nowrap;
+	vertical-align: top;
+}
+#header{
+	width:2000px;
+	height:230px;
+	background-color:#ddd;
+	padding-left:150px;
+	padding-top:30px;
+}
+#header h1{
+	position:relative;
+}
+#header h3{
+	margin-left: 150px;
+	position:relative;
+	left:50px;
+	color:#555;
+}
+#header h4{
+	margin-left: 150px;
+	position:relative;
+	left:0px;
+	top:20px;
+	color:#888;
+}
+#main-view{
+	display:inline-block;
+	border:solid 2px #ddd;
+	width:1500px;
+	height:1300px;
+	vertical-align: top;
+	overflow-x:auto;
+}
+#square-container{
+	width:2300px;
+	height:800px;
+	white-space: normal;
+	overflow: auto;
+}
+#goto-barre{
+	position:fixed;
+	left:15px;
+	top:30%;
+	min-height:200px;
+	z-index:99;
+	border:solid 2px #ddd;
+	background-color: rgba(255,255,255,0,5);
+	padding:10px;
+}
+
+.square{
+	background-color: #eee;
+	padding:15px;
+	margin:50px;
+	width:300px;
+	height:300px;
+	display:inline-block;
+}
+.square .square-list{
+	height: 160px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	border:solid 2px #ddd;
+}
+.square .square-list li{
+	margin-bottom: 3px;
+	margin-top:3px;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:15px;
+	-webkit-transition:background-color 3s ease;
+	   -moz-transition:background-color 3s ease;
+	        transition:background-color 3s ease;
+}
+
+button{
+	margin:5px;
+}
+
+.colored {
+	background-color: #84ae21;
+}
+
+
+
+
