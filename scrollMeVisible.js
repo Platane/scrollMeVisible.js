@@ -1,3 +1,13 @@
+/**
+ * @summary     scrollMeVisible
+ * @description the simpliest way to set the scrollPane to make an element visible in the window viewport
+ * @version     0.1
+ * @author      arthur brongniart <arthur@arthur.brongniart.fr>
+ * @link        https://github.com/Platane/scrollMeVisible.js
+ * @license     MIT licensed
+ * @copyright   Copyright 2013 arthur brongniart
+ *
+ */
 (function($){
 
     // is the element a document
@@ -98,12 +108,8 @@
     var o= $el.offset();
     rect.top=o.top;
     rect.left=o.left;
-    rect.bottom=rect.top+$el.outerHeight();
-    rect.right=rect.left+$el.outerWidth();
-
-    var perfectIn=false;
-    if( view.left<=rect.left && rect.right<=view.right && view.top<=rect.top && rect.bottom<=view.bottom )
-        perfectIn=true;
+    rect.bottom=rect.top+$el.outerHeight(false);
+    rect.right=rect.left+$el.outerWidth(false);
 
     //on x axe
     var xscrollBy=0,
@@ -157,9 +163,6 @@
        if( s.x==safter.x && s.y==safter.y )
           obj=null;
     }
-    else
-      if( !perfectIn )
-        console.log('errer');
 
     //reccusive call 
     var acc=null;
@@ -382,7 +385,7 @@
         options.ease=defaultOptions.ease;
 
 
-      if( !options.animate ){
+      if( !options.animate || q.length==0 ){
         // no animation, as the scrollQueu produce a side effect which set all the scrollBar at right position, we are good to go
         // trigger the callback
         if( options.callback )
