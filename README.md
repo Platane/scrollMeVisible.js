@@ -2,13 +2,13 @@
 
 ### Usage
 
-  As I work on a web app project, I came to a point that I want to highlight some DOM element. Unfortunately those were lost in a nasty composition of scroll pane, therefore they weren't visible in the browser window viewport. I thought I need to do something for them.
+As I work on a web app project, I came to a point that I want to highlight some DOM element. Unfortunately those were lost in a nasty composition of scroll pane, therefore they weren't visible in the browser window viewport. I thought I need to do something for them.
 
-  That's why I wrote this plugin, it allow to show an element regardless of where it is on the DOM stream. See how it's work :
+That's why I wrote this plugin, it allow to show an element regardless of where it is on the DOM stream. See how it's work :
 
 ` $('#myId').scrollMeVisible( <options> ); `
 
-Pretty simple. options are implemented, mainly for scrolling with fancies animations.
+Pretty simple. options are implemented, mainly for scrolling with fancy animations.
 
 ```
 
