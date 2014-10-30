@@ -44,6 +44,11 @@
               x:el.scrollX,
               y:el.scrollY
             };
+        if (el.pageXOffset!=null && el.pageYOffset!=null)
+          return {
+            x:el.pageXOffset,
+            y:el.pageYOffset
+          };
         throw 'unable to scroll';
     };
 
